@@ -59,6 +59,7 @@
     <article class="post-7278 page type-page status-publish hentry" id="post-7278">
       <header class="entry-header has-text-align-center header-footer-group">
         <div class="entry-header-inner section-inner medium">
+          <div id="site-content"></div>
           <h1 class="entry-title">Tamil Speech Therapy</h1>
         </div>
       </header>
@@ -91,6 +92,16 @@
 
   <script>
     // JavaScript code
+    var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos || window.pageYOffset < 90) {
+    document.getElementById("site-header").style.top = "0";
+  } else {
+    document.getElementById("site-header").style.top = "-90px";
+  }
+  prevScrollpos = currentScrollPos;
+}
   </script>
 </body>
 

@@ -10,3 +10,6 @@ def letters(request):
 
 def base(request):
     return render(request,'base.html')
+
+def register(request):
+    return render(request,'register.html')
