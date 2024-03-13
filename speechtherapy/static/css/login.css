@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #D2D180;
+}
+
+.login {
+    width: 400px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #B2B377; /* Updated background color */
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login form label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.login form label i {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.login form input[type="text"],
+.login form input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
+.login form input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #333;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login form input[type="submit"]:hover {
+    background: #555;
+}
+
+/* Styling for the registration prompt */
+.register-prompt {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.register-prompt:hover {
+    color: #555;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #D2D180;
+}
+
+.register {
+    width: 400px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #B2B377;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.register h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register form label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.register form label i {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.register form input[type="text"],
+.register form input[type="email"],
+.register form input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
+.register form input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #333;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.register form input[type="submit"]:hover {
+    background: #555;
+}
+
+.input-label {
+    margin-bottom: 10px; /* Adjust as needed */
+}

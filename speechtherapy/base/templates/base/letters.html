@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+        {% for i in letter %}
+        <h2 class="wp-block-heading has-text-align-center" id="inline_menus">
+            <br />{{ i.id }} -- {{ i.name }}
+          </h2>
+        {% endfor %}
+
+
+{% endblock %}
