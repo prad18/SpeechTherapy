@@ -38,7 +38,6 @@ def registerPage(request):
             user.save()
             login(request, user)
             username = form.cleaned_data.get('username')
-            messages.success(request, f"Account was created for {username}")
             return redirect('learn')
         else:
             for field, errors in form.errors.items():
