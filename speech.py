@@ -3,8 +3,10 @@ import pyaudio
 import wave
 import os
 import keyboard
+from key import API_KEY
+
 # Set up OpenAI API key
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=API_KEY)
 
 # Initialize PyAudio
 audio = pyaudio.PyAudio()
