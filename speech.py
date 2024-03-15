@@ -16,6 +16,7 @@ stream = audio.open(format=pyaudio.paInt16,
                     input=True,
                     frames_per_buffer=1024)
 
+
 print("Start speaking...")
 
 frames = []

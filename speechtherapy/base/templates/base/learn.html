@@ -28,39 +28,56 @@
 <div class="inline-menu-wrapper">
   <ul id="menu-dictionary" class="inline-menu">
     <li id="menu-item-1209" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1209">
-      <a href="">அ</a>
+      <a href="#">அ</a>
     </li>
     <li id="menu-item-3810" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3810">
-      <a href="">ஆ</a>
+      <a href="#">ஆ</a>
     </li>
     <li id="menu-item-1648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1648">
-      <a href="">இ</a>
+      <a href="#">இ</a>
     </li>
     <li id="menu-item-1519" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1519">
-      <a href="">ஈ</a>
+      <a href="#">ஈ</a>
     </li>
     <li id="menu-item-1518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1518">
-      <a href="">உ</a>
+      <a href="#">உ</a>
     </li>
     <li id="menu-item-1517" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1517">
-      <a href="">ஊ</a>
+      <a href="#">ஊ</a>
     </li>
     <li id="menu-item-1649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1649">
-      <a href="">எ</a>
+      <a href="#">எ</a>
     </li>
     <li id="menu-item-1650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1650">
-      <a href="">ஏ</a>
+      <a href="#">ஏ</a>
     </li>
     <li id="menu-item-1651" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1651">
-      <a href="">ஐ</a>
+      <a href="#">ஐ</a>
     </li>
     <li id="menu-item-1652" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1652">
-      <a href="">ஒ</a>
+      <a href="#">ஒ</a>
     </li>
     <li id="menu-item-1653" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1653">
-      <a href="">ஔ</a>
+      <a href="#">ஔ</a>
     </li>
   </ul>
 </div>
+
+<audio id="audioPlayer"></audio>
+
+<script>
+  const audioPlayer = document.getElementById('audioPlayer');
+  const menuItems = document.querySelectorAll('#menu-dictionary li');
+
+  menuItems.forEach((item) => {
+      item.addEventListener('click', () => {
+          const letter = item.querySelector('a').textContent;
+          console.log(letter);
+          const audioFile = "{% static 'audio/Tamil-' %}" + letter + ".mp3";
+          audioPlayer.src = audioFile;
+          audioPlayer.play();
+      });
+  });
+</script>
 
 {% endblock %}
