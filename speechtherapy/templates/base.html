@@ -95,38 +95,6 @@
     </footer>
   </div>
 
-  <script>
-    // JavaScript code
-    var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos || window.pageYOffset < 90) {
-    document.getElementById("site-header").style.top = "0";
-  } else {
-    document.getElementById("site-header").style.top = "-90px";
-  }
-  prevScrollpos = currentScrollPos;
-}
-
-   // JavaScript code
-   var prevScrollpos = window.pageYOffset;
-   window.onscroll = function() {
-     var currentScrollPos = window.pageYOffset;
-     if (prevScrollpos > currentScrollPos || window.pageYOffset < 90) {
-       document.getElementById("site-header").style.top = "0";
-     } else {
-       document.getElementById("site-header").style.top = "-90px";
-     }
-     prevScrollpos = currentScrollPos;
-   }
- 
-   // Prevent scrolling to the top when clicking the "To the top" link
-   document.getElementById("menu-item-1209").addEventListener("click", function(event) {
-     event.preventDefault();
-     // Add your custom behavior here, e.g., smooth scrolling
-   });
-
-  </script>
 </body>
 
 </html>

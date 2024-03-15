@@ -73,14 +73,28 @@
   const menuItems = document.querySelectorAll('#menu-dictionary li');
 
   menuItems.forEach((item) => {
-      item.addEventListener('click', () => {
-          const letter = item.querySelector('a').textContent;
-          console.log(letter);
-          const audioFile = "{% static 'audio/Tamil-' %}" + letter + ".mp3";
-          audioPlayer.src = audioFile;
-          audioPlayer.play();
-      });
+    item.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the default link behavior
+      const letter = item.querySelector('a').textContent;
+      console.log(letter);
+      const audioFile = "{% static 'audio/Tamil-' %}" + letter + ".mp3";
+      audioPlayer.src = audioFile;
+      audioPlayer.play();
+      // Add your custom behavior here, e.g., smooth scrolling
+    });
   });
+
+  // JavaScript code
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos || window.pageYOffset < 90) {
+      document.getElementById("site-header").style.top = "0";
+    } else {
+      document.getElementById("site-header").style.top = "-90px";
+    }
+    prevScrollpos = currentScrollPos;
+  }
 </script>
 
 {% endblock %}
