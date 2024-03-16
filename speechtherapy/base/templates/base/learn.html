@@ -1,15 +1,17 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
+<div>
+    <h1>Pronunciation Check</h1>
+    <p>Pronounce the Tamil word displayed below:</p>
+    <button id="recordButton">Start Recording</button>
+    <p id="wordDisplay">{{ random_tamil_word }}</p>
+    <p id="scoreDisplay"></p>
+    <form id="pronunciationForm">
+        {% csrf_token %}
+    </form>
+</div>
 
-
-        {% for i in letter %}
-        <h2 class="wp-block-heading has-text-align-center" id="inline_menus">
-            <br />{{ i.id }} -- {{ i.name }}
-          </h2>
-        {% endfor %}
-
-
+<script src="{% static 'scripts/script.js' %}"></script>
 {% endblock %}

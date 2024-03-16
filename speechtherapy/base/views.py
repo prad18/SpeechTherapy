@@ -1,10 +1,19 @@
 from django.shortcuts import render , redirect
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from openai import OpenAI
+import wave
+import os
+from fuzzywuzzy import fuzz
+import random
+
+
 # Create your views here.
 
 def loginPage(request):
@@ -51,9 +60,6 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
-@login_required(login_url='home')
-def learn(request):
-        return render(request, 'base/learn.html')
 
 def register(request):
     return render(request,'register.html')
@@ -62,3 +68,48 @@ def register(request):
 def letters(request):
     return render(request,'base/letters.html')
 
+def learn(request):
+    client = OpenAI(api_key="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")
+    if request.method == 'GET':
+        # Load the Tamil words from a file
+        with open('words.txt', 'r', encoding='utf-8') as file:
+            words = file.read().splitlines()
+
+        # Select a random Tamil word
+        random_tamil_word = random.choice(words)
+
+        context = {
+            'random_tamil_word': random_tamil_word,
+        }
+        return render(request, 'base/learn.html', context)
+
+    elif request.method == 'POST':
+        # Receive the audio file and the word from the client
+        audio_file = request.FILES.get('audio_file')
+        word = request.POST.get('word')
+
+        # Save the audio file temporarily
+        temp_file_path = 'temp.wav'
+        with open(temp_file_path, 'wb+') as temp_file:
+            for chunk in audio_file.chunks():
+                temp_file.write(chunk)
+
+        try:
+            # Transcribe the audio using OpenAI Whisper
+            with open(temp_file_path, 'rb') as audio_file:
+                transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file, language="ta")
+            # Use fuzzy string matching to compare the text and transcribed text
+            similarity_score = fuzz.ratio(word, transcript.text)
+
+            # Remove the temporary file
+            os.remove(temp_file_path)
+
+            # Return the similarity score as JSON response
+            return JsonResponse({'similarity_score': similarity_score})
+
+        except Exception as e:
+            # If an error occurs, return error message as JSON response
+            return JsonResponse({'error': str(e)}, status=500)
+
+    # Return a 400 Bad Request response if the request method is not supported
+    return JsonResponse({'error': 'Bad request'}, status=400)
