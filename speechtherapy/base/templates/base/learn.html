@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block content %}
+
+<h2 class="wp-block-heading has-text-align-center"><br /></h2>
+<div class="inline-menu-wrapper">
+  <ul id="menu-phonics-1" class="inline-menu">    
+    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7485">
+      <a href="{% url 'letters' %}">Letters</a>
+    </li>
+    <li
+      class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-7278 current_page_item menu-item-7484">
+      <a href="#">Learn</a>
+    </li>
+
+    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7486">
+      <a href="" aria-current="page">Track</a>
+    </li>
+  </ul>
+</div>
+
+
 <div>
     <h1>Pronunciation Check</h1>
     <p>Pronounce the Tamil word displayed below:</p>

@@ -1,4 +1,3 @@
-// script.js
 const recordButton = document.getElementById('recordButton');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const wordDisplay = document.getElementById('wordDisplay');
@@ -44,6 +43,10 @@ recordButton.addEventListener('click', async () => {
       } catch (error) {
         console.error('Error sending audio data:', error);
         scoreDisplay.textContent = `Error: ${error.message}`;
+      } finally {
+        // Clear audioChunks array and close the stream
+        audioChunks = [];
+        stream.getTracks().forEach(track => track.stop());
       }
     });
 

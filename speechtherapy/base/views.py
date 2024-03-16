@@ -69,7 +69,7 @@ def letters(request):
     return render(request,'base/letters.html')
 
 def learn(request):
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="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")
     if request.method == 'GET':
         # Load the Tamil words from a file
         with open('words.txt', 'r', encoding='utf-8') as file:
