@@ -19,7 +19,7 @@ def loginPage(request):
         user = authenticate(request,username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('learn')
+            return redirect('letters')
         else:
             messages.error(request, "Username or Password is incorrect!")
 
@@ -38,7 +38,7 @@ def registerPage(request):
             user.save()
             login(request, user)
             username = form.cleaned_data.get('username')
-            return redirect('learn')
+            return redirect('letters')
         else:
             for field, errors in form.errors.items():
                 for error in errors:
