@@ -15,44 +15,50 @@ recordButton.addEventListener('click', async () => {
     });
 
     mediaRecorder.addEventListener('stop', async () => {
+      console.log('Recording stopped');
+
       const audioBlob = new Blob(audioChunks);
       const audioFile = new File([audioBlob], 'audio.wav', { type: 'audio/wav' });
       const formData = new FormData();
+      console.log('Word displayed:', wordDisplay.textContent);
       const word = wordDisplay.textContent; // Get the word from the wordDisplay element
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
       formData.append('audio_file', audioFile);
       formData.append('word', word);
-
-      // Add CSRF token to formData
-      const csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value;
       formData.append('csrfmiddlewaretoken', csrfToken);
 
-      // Send the FormData object to the server using the POST method to /learn/ URL
+      // Print formData to check if it contains the correct data
+      console.log('FormData:', formData);
+
       try {
         const response = await fetch('/learn/', {
           method: 'POST',
           body: formData,
         });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
         const data = await response.json();
 
-        if (response.ok) {
-          scoreDisplay.textContent = `Pronunciation correctness: ${data.similarity_score}%`;
-        } else {
-          scoreDisplay.textContent = `Error: ${data.error}`;
-        }
+        // Print data to check if it contains the correct information
+        console.log('Response data:', data);
+
+        // Update the scoreDisplay element with the correctness percentage
+        scoreDisplay.textContent = `Pronunciation correctness: ${data.similarity_score}%`;
+
       } catch (error) {
         console.error('Error sending audio data:', error);
         scoreDisplay.textContent = `Error: ${error.message}`;
-      } finally {
-        // Clear audioChunks array and close the stream
-        audioChunks = [];
-        stream.getTracks().forEach(track => track.stop());
       }
     });
 
     mediaRecorder.start();
     console.log('Recording started');
     recordButton.textContent = 'Stop Recording'; // Change button text to indicate recording is ongoing
+
   } else if (mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
     console.log('Recording stopped');

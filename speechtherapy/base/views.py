@@ -7,12 +7,14 @@ from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+import traceback
 from openai import OpenAI
 import wave
 import os
 from fuzzywuzzy import fuzz
 import random
-
+from .key import API_KEY
+import os
 
 # Create your views here.
 
@@ -68,8 +70,9 @@ def register(request):
 def letters(request):
     return render(request,'base/letters.html')
 
+client = OpenAI(api_key=API_KEY)
+
 def learn(request):
-    client = OpenAI(api_key="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")
     if request.method == 'GET':
         # Load the Tamil words from a file
         with open('words.txt', 'r', encoding='utf-8') as file:
@@ -98,18 +101,23 @@ def learn(request):
             # Transcribe the audio using OpenAI Whisper
             with open(temp_file_path, 'rb') as audio_file:
                 transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file, language="ta")
+            
             # Use fuzzy string matching to compare the text and transcribed text
             similarity_score = fuzz.ratio(word, transcript.text)
 
-            # Remove the temporary file
-            os.remove(temp_file_path)
+            # Remove the temporary file if it exists
+            if os.path.exists(temp_file_path):
+                os.remove(temp_file_path)
 
             # Return the similarity score as JSON response
             return JsonResponse({'similarity_score': similarity_score})
 
         except Exception as e:
+            # Remove the temporary file if it exists and an error occurs
+            if os.path.exists(temp_file_path):
+                os.remove(temp_file_path)
             # If an error occurs, return error message as JSON response
             return JsonResponse({'error': str(e)}, status=500)
-
+        
     # Return a 400 Bad Request response if the request method is not supported
     return JsonResponse({'error': 'Bad request'}, status=400)
