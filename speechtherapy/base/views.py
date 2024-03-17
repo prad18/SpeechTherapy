@@ -13,7 +13,6 @@ import wave
 import os
 from fuzzywuzzy import fuzz
 import random
-from .key import API_KEY
 import os
 
 # Create your views here.
