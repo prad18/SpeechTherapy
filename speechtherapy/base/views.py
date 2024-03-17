@@ -70,7 +70,7 @@ def register(request):
 def letters(request):
     return render(request,'base/letters.html')
 
-client = OpenAI(api_key=API_KEY)
+client = OpenAI(api_key=os.environ.get('API_KEY'))
 
 def learn(request):
     if request.method == 'GET':
